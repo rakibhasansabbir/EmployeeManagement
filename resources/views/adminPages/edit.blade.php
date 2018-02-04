@@ -58,6 +58,7 @@
 
                     {{Form::hidden('_method','PUT')}}
                     {{Form::submit('Save',['class' => 'btn btn-primary'])}}
+                    <a href="/home" class="btn btn-danger">Cancel</a>
                     {!! Form::close() !!}
 
                 </div>

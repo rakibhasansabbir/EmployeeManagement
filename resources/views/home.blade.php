@@ -16,6 +16,8 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add
                             Employee
                         </button>
+                            <a type="button" class="btn btn-success" href="#">
+                                Show Employee Activities </a>
                     </div>
                 </div>
             </div>
@@ -37,14 +39,14 @@
 
                         {{--Add Designation--}}
                         <div class="form-group">
-                            {{Form::label('name','Designation')}}
-                            {{Form::text('name','',['class'=> 'form-control', 'placeholder' => 'Name'])}}
+                            {{Form::label('designation','Designation')}}
+                            {{Form::text('designation','',['class'=> 'form-control', 'placeholder' => 'Name'])}}
                         </div>
 
                         {{--Add Department--}}
                         <div class="form-group">
-                            {{Form::label('name','Department')}}
-                            {{Form::text('name','',['class' => 'form-control', 'placeholder' => 'Name'])}}
+                            {{Form::label('department','Department')}}
+                            {{Form::text('department','',['class' => 'form-control', 'placeholder' => 'Name'])}}
                         </div>
 
                         {{--Add Name--}}

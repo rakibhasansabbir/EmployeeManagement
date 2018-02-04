@@ -15,6 +15,8 @@ class CreateEmployeeInfosTable extends Migration
     {
         Schema::create('employee_infos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('employeeDesignation');
+            $table->string('employeeDepartment');
             $table->string('employeeName');
             $table->string('employeeEmail')->unique();
             $table->string('employeePassword');

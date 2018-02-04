@@ -12,6 +12,11 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('adminPages.login');
@@ -49,6 +54,8 @@ class AdminController extends Controller
         //create post
         $EmployeeInfo = new EmployeeInfo();
 
+        $EmployeeInfo->employeeDesignation = $request->input('designation');
+        $EmployeeInfo->employeeDepartment = $request->input('department');
         $EmployeeInfo->employeeName = $request->input('name');
         $EmployeeInfo->employeeEmail = $request->input('email');
         $EmployeeInfo->employeePassword = $request->input('password');
