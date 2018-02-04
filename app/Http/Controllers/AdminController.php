@@ -110,6 +110,7 @@ class AdminController extends Controller
         $EmployeeInfo->employeeContactNumber = $request->input('contactNumber');
         $EmployeeInfo->employeeDateOfBirth = $request->input('dob');
         $EmployeeInfo->save();
+        return redirect('/home')->with('success','Employee Edited');
     }
 
     /**

@@ -35,6 +35,18 @@
                     <div class="modal-body">
                         {!! Form::open(['action' => 'AdminController@store', 'method' => 'POST']) !!}
 
+                        {{--Add Designation--}}
+                        <div class="form-group">
+                            {{Form::label('name','Designation')}}
+                            {{Form::text('name','',['class'=> 'form-control', 'placeholder' => 'Name'])}}
+                        </div>
+
+                        {{--Add Department--}}
+                        <div class="form-group">
+                            {{Form::label('name','Department')}}
+                            {{Form::text('name','',['class' => 'form-control', 'placeholder' => 'Name'])}}
+                        </div>
+
                         {{--Add Name--}}
                         <div class="form-group">
                             {{Form::label('name','Name')}}
@@ -99,8 +111,8 @@
             @foreach($Employee as $employee)
                 <tr>
                     <td>{{$employee->id}}</td>
-                    <td>{{$employee->employeeName}}</td>
-                    <td>{{$employee->employeeName}}</td>
+                    <td>{{$employee->employeeDesignation}}</td>
+                    <td>{{$employee->employeeDepartment}}</td>
                     <td>{{$employee->employeeName}}</td>
                     <td>{{$employee->employeeEmail}}</td>
                     <td>{{$employee->employeeContactNumber}}</td>
