@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\EmployeeInfo;
 use Illuminate\Http\Request;
+use App\Employee;
+use App\EmployeeActivity;
 
 class AdminController extends Controller
 {
@@ -12,14 +13,16 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
 
     public function index()
     {
-        return view('adminPages.login');
+      $Activity = EmployeeActivity::all();
+      return view('activityTable')->with('Activities',$Activity);
+
     }
 
     /**
@@ -40,30 +43,33 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //field validate
-        $this->validate($request,[
-            'name'=> 'required',
-            'email'=> 'required',
-            'contactNumber'=> 'required',
-            'dob'=> 'required',
-            'password'=> 'required'
-        ]);
+      $this->validate($request,[
+         'name'=> 'required',
+
+         'email'=>'required|unique:employees,email',
+
+         'contactNumber'=> 'required|unique:employees,contactNumber',
+         'dateOfBirth'=> 'required',
+         'password'=> 'required'
+     ]);
 
 
 
-        //create post
-        $EmployeeInfo = new EmployeeInfo();
+     //create post
+     $Employee = new Employee();
 
-        $EmployeeInfo->employeeDesignation = $request->input('designation');
-        $EmployeeInfo->employeeDepartment = $request->input('department');
-        $EmployeeInfo->employeeName = $request->input('name');
-        $EmployeeInfo->employeeEmail = $request->input('email');
-        $EmployeeInfo->employeePassword = $request->input('password');
-        $EmployeeInfo->employeeContactNumber = $request->input('contactNumber');
-        $EmployeeInfo->employeeDateOfBirth = $request->input('dob');
-        $EmployeeInfo->save();
+     $Employee->designation = $request->input('designation');
+     $Employee->department = $request->input('department');
+     $Employee->name = $request->input('name');
+     $Employee->email = $request->input('email');
+     $Employee->password = bcrypt($request->input('password'));
+     $Employee->contactNumber = $request->input('contactNumber');
+     $Employee->dateOfBirth = $request->input('dateOfBirth');
 
-        return redirect('/home')->with('success','Employee Added');
+     // $request['password'] = bcrypt($request->password);
+
+     $Employee->save();
+     return redirect('/home')->with('success','Employee Added');
     }
 
     /**
@@ -85,8 +91,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $SingleEmployee = EmployeeInfo::find($id);
-        return view('adminPages.edit')->with('SingleEmployee',$SingleEmployee);
+      $SingleEmployee = Employee::find($id);
+    return view('edit_employee')->with('SingleEmployee',$SingleEmployee);
     }
 
     /**
@@ -98,26 +104,31 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'name'=> 'required',
-            'email'=> 'required',
-            'contactNumber'=> 'required',
-            'dob'=> 'required',
-            'password'=> 'required'
-        ]);
+      $this->validate($request,[
+        'name'=> 'required',
+
+        'email'=>'required',
+
+        'contactNumber'=> 'required',
+        'dateOfBirth'=> 'required',
+        'password'=> 'required'
+    ]);
 
 
 
-        //create post
-        $EmployeeInfo = EmployeeInfo::find($id);
+    // //create post
+      $Employee = Employee::find($id);
 
-        $EmployeeInfo->employeeName = $request->input('name');
-        $EmployeeInfo->employeeEmail = $request->input('email');
-        $EmployeeInfo->employeePassword = $request->input('password');
-        $EmployeeInfo->employeeContactNumber = $request->input('contactNumber');
-        $EmployeeInfo->employeeDateOfBirth = $request->input('dob');
-        $EmployeeInfo->save();
-        return redirect('/home')->with('success','Employee Edited');
+    $Employee->designation = $request->input('designation');
+    $Employee->department = $request->input('department');
+    $Employee->name = $request->input('name');
+    $Employee->email = $request->input('email');
+    $Employee->password = bcrypt($request->input('password'));
+    $Employee->contactNumber = $request->input('contactNumber');
+    $Employee->dateOfBirth = $request->input('dateOfBirth');
+    $Employee->save();
+
+    return redirect('/home')->with('success','Employee Edited');
     }
 
     /**
@@ -128,8 +139,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $EmployeeInfo = EmployeeInfo::find($id);
-        $EmployeeInfo->delete();
-        return redirect('/home')->with('success','Employee Deleted');
+      $Employee = Employee::find($id);
+      $Employee->delete();
+      return redirect('/home')->with('success','Employee Deleted');
     }
 }

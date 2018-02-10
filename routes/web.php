@@ -15,9 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('employee','EmployeeController');
-Route::resource('admin','AdminController');
-
 Auth::routes();
+Route::resource('admin','AdminController');
+Route::resource('test','TestController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('employee')->group(function (){
+
+
+
+    Route::get('/login', 'Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
+    Route::post('/login', 'Auth\EmployeeLoginController@login')->name('employee.login.submit');
+
+    Route::get('/', 'EmployeeController@index')->name('employee.dashboard');
+    Route::get('/activity', 'EmployeeController@store')->name('employee.activity.submit');
+    Route::put('/stopped', 'EmployeeController@update')->name('activity.stop.submit');
+
+});

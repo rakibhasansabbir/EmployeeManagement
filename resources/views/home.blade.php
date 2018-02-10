@@ -16,7 +16,7 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add
                             Employee
                         </button>
-                            <a type="button" class="btn btn-success" href="#">
+                            <a type="button" class="btn btn-success" href="/admin">
                                 Show Employee Activities </a>
                     </div>
                 </div>
@@ -37,6 +37,7 @@
                     <div class="modal-body">
                         {!! Form::open(['action' => 'AdminController@store', 'method' => 'POST']) !!}
 
+                        {{csrf_token()}}
                         {{--Add Designation--}}
                         <div class="form-group">
                             {{Form::label('designation','Designation')}}
@@ -58,25 +59,25 @@
                         {{--Add Email--}}
                         <div class="form-group">
                             {{Form::label('email','Email')}}
-                            {{Form::text('email','',['id' => 'article-ckeditor','class' => 'form-control', 'placeholder' => 'Email'])}}
+                            {{Form::text('email','',['id' => 'email', 'class' => 'form-control', 'placeholder' => 'Email'])}}
                         </div>
 
                         {{--Add ContactNumber--}}
                         <div class="form-group">
                             {{Form::label('contactNumber','Contact Number')}}
-                            {{Form::text('contactNumber','',['id' => 'article-ckeditor','class' => 'form-control', 'placeholder' => 'Contact Number'])}}
+                            {{Form::text('contactNumber','',['id' => 'contactNumber','class' => 'form-control', 'placeholder' => 'Contact Number'])}}
                         </div>
 
                         {{--Date of birth--}}
                         <div class="form-group">
-                            {{Form::label('dob','Date of Birth: ')}}
-                            {{Form::date('dob')}}
+                            {{Form::label('dateOfBirth','Date of Birth: ')}}
+                            {{Form::date('dateOfBirth')}}
                         </div>
 
                         {{--Add password--}}
                         <div class="form-group">
                             {{Form::label('password','Password')}}
-                            {{Form::text('password','',['id' => 'article-ckeditor','class' => 'form-control', 'placeholder' => 'Password'])}}
+                            {{Form::text('password','',['id' => 'password','class' => 'form-control', 'placeholder' => 'Password'])}}
                         </div>
 
 
@@ -105,27 +106,27 @@
                     <th>Email</th>
                     <th>ContactNumber</th>
                     <th>Date of birth</th>
-                    <th>Password</th>
+                    <!-- <th>Password</th> -->
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($Employee as $employee)
+            @foreach($Employee as $activities)
                 <tr>
-                    <td>{{$employee->id}}</td>
-                    <td>{{$employee->employeeDesignation}}</td>
-                    <td>{{$employee->employeeDepartment}}</td>
-                    <td>{{$employee->employeeName}}</td>
-                    <td>{{$employee->employeeEmail}}</td>
-                    <td>{{$employee->employeeContactNumber}}</td>
-                    <td>{{$employee->employeeDateOfBirth}}</td>
-                    <td>{{$employee->employeePassword}}</td>
+                    <td>{{$activities->id}}</td>
+                    <td>{{$activities->designation}}</td>
+                    <td>{{$activities->department}}</td>
+                    <td>{{$activities->name}}</td>
+                    <td>{{$activities->email}}</td>
+                    <td>{{$activities->contactNumber}}</td>
+                    <td>{{$activities->dateOfBirth}}</td>
+                    <!-- <td>{{$activities->password}}</td> -->
                     <td style="width: 150px" class="text-center">
                         <div class="btn-group btn-group-sm">
-                            <a href="/admin/{{$employee->id}}/edit" class="btn btn-success">Edit</a>
-                            {{--<a href="/admin/{{$employee->id}}" class="btn btn-danger">Delete</a>--}}
+                            <a href="/admin/{{$activities->id}}/edit" class="btn btn-success">Edit</a>
+                            {{--<a href="/admin/{{$activities->id}}" class="btn btn-danger">Delete</a>--}}
 
-                            {!! Form::open(['action' => ['AdminController@destroy', $employee->id],
+                            {!! Form::open(['action' => ['AdminController@destroy', $activities->id],
           'method' => 'POST', 'class' => 'pull-right']) !!}
 
                             {{Form::hidden('_method', 'DELETE')}}
@@ -136,7 +137,7 @@
                     </td>
                     @endforeach
                     @else
-                        <p class="text">No employee found</p>
+                        <p class="text">No activities found</p>
                     @endif
                 </tr>
 

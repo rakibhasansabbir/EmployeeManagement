@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\EmployeeInfo;
+use App\Employee;
 
 class HomeController extends Controller
 {
@@ -24,8 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $EmployeeInfo = EmployeeInfo::all();
-
-        return view('home')->with('Employee', $EmployeeInfo);
+      $Employee = Employee::all();
+        return view('home')->with('Employee',$Employee);
     }
 }
