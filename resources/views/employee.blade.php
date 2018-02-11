@@ -24,29 +24,27 @@
 
                       <button class="btn btn-primary" type="submit" name="button">Start Countdown</button>
                     </form>
-                    <?php
-                      $ids =  Auth::user()->id;
-                     ?>
+
                      {!! Form::open(['route' => ['activity.stop.submit', Auth::user()->id],'method' => 'put']) !!}
 
                    {{--Edit Designation--}}
                    <div class="form-group">
-                       {{Form::text('id', Auth::user()->id,['class' => 'form-control'])}}
+                       {{Form::hidden('id', Auth::user()->id,['class' => 'form-control'])}}
                    </div>
 
                    {{--Edit Department--}}
                    <div class="form-group">
-                       {{Form::text('ip',$_SERVER['REMOTE_ADDR'],['class' => 'form-control' ])}}
+                       {{Form::hidden('ip',$_SERVER['REMOTE_ADDR'],['class' => 'form-control' ])}}
                    </div>
 
                    {{--Add Name--}}
                    <div class="form-group">
-                       {{Form::text('mac',"B0:C0:90:4E:31:B4",['class' => 'form-control' ])}}
+                       {{Form::hidden('mac',"B0:C0:90:4E:31:B4",['class' => 'form-control' ])}}
                    </div>
 
                    {{--Add Email--}}
                    <div class="form-group">
-                       {{Form::text('pcName',"rakib-pc",['id' => 'article-ckeditor','class' => 'form-control email'])}}
+                       {{Form::hidden('pcName',"rakib-pc",['id' => 'article-ckeditor','class' => 'form-control email'])}}
                    </div>
 
                    {{Form::hidden('_method','PUT')}}

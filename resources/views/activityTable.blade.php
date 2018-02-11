@@ -37,6 +37,7 @@
                 <th>Mac Address</th>
                 <th>In Time</th>
                 <th>Out Time</th>
+                <th>Stay</th>
                 {{--<th class="text-center">Action</th>--}}
             </tr>
         </thead>
@@ -52,6 +53,7 @@
                 <td>{{$activities->macAddress}}</td>
                 <td>{{$activities->created_at->format('h:i:sa')}}</td>
                 <td>{{$activities->updated_at->format('h:i:sa')}}</td>
+                <td>{{$activities->stay}}</td>
                 {{--<td style="width: 150px" class="text-center">--}}
                     {{--<div class="btn-group btn-group-sm">--}}
                         {{--<a href="/admin/{{$activities->id}}" class="btn btn-danger">Delete</a>--}}

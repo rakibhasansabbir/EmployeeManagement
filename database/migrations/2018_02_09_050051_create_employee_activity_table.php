@@ -15,6 +15,7 @@ class CreateEmployeeActivityTable extends Migration
     {
         Schema::create('employee_activities', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('stay');
             $table->string('pcName');
             $table->string('macAddress');
             $table->string('ipAddress');
