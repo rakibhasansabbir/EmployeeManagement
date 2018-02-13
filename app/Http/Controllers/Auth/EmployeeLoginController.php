@@ -29,7 +29,7 @@ class EmployeeLoginController extends Controller
        if ( Auth::guard('employee')->attempt(['email' => $request->email,
            'password' => $request->password], $request->remember)){
              $Activity = EmployeeActivity::all();
-           return redirect()->intended(route('employee.dashboard'));
+           return redirect()->intended(route('employee.dashboard',compact('Activity')));
        }
 
        return redirect()->back()->withInput($request->only('email', 'remember'));

@@ -31,6 +31,7 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        date_default_timezone_set("Asia/Dhaka");
 
       $this->validate($request,[
         'id'=> 'required',
@@ -42,6 +43,7 @@ class EmployeeController extends Controller
     ]);
     $EmployeeActivity = EmployeeActivity::where('employee_id', $request->input('id'))
     ->where( 'stay', 'YES')
+    ->whereDate( 'created_at', date("Y-m-d"))
     ->get();
 
     foreach ($EmployeeActivity as $emp) {
@@ -56,14 +58,26 @@ class EmployeeController extends Controller
         $EmployeeActivity->pcName = $request->input('pcName');
         $EmployeeActivity->save();
 
-        return redirect('/employee')->with('success','Welcome to our company your time start now');
 
+        $Time = EmployeeActivity::where('employee_id', $request->input('id'))
+            ->whereDate( 'created_at', date("Y-m-d"))
+            ->get();
+
+        foreach ($Time as $time){
+            $InTime = $time->created_at;
+        }
+        return view('test2')
+            ->with('success','Welcome to our company your time start now')
+            ->with('value', date('M d, Y H:i:s'));
 
   }
 
     public function update(Request $request){
-      $EmployeeActivity = EmployeeActivity::where('employee_id', $request->input('id'))
-      ->whereDate( 'created_at', '2018-02-11')
+        date_default_timezone_set("Asia/Dhaka");
+
+
+        $EmployeeActivity = EmployeeActivity::where('employee_id', $request->input('id'))
+      ->whereDate( 'created_at', date("Y-m-d"))
       ->get();
 
       foreach ($EmployeeActivity as $emp) {

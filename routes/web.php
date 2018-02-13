@@ -21,12 +21,8 @@ Route::get('/test1', function () {
 Auth::routes();
 Route::resource('admin','AdminController');
 Route::resource('test','TestController');
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::prefix('employee')->group(function (){
-
-
 
     Route::get('/login', 'Auth\EmployeeLoginController@showLoginForm')->name('employee.login');
     Route::post('/login', 'Auth\EmployeeLoginController@login')->name('employee.login.submit');
