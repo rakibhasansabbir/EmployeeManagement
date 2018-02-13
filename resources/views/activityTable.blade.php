@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -24,7 +27,9 @@
 
 <div class="table-responsive container">
     <h2 class="text-info">Employee Activities</h2>
-    <table class="table table-bordered table-hover table-striped">
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <br>
+    <table class="table table-bordered table-striped">
         <thead>
         @if(count($Activities)>0)
             <tr>
@@ -41,7 +46,7 @@
                 {{--<th class="text-center">Action</th>--}}
             </tr>
         </thead>
-        <tbody>
+        <tbody id="myTable">
         @foreach($Activities as $activities)
             <tr>
                 <td>{{$activities->created_at->format('d-m-Y')}}</td>
@@ -76,4 +81,14 @@
         </tbody>
     </table>
 </div>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 @endsection
