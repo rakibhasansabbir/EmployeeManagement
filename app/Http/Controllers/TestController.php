@@ -12,19 +12,18 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $global = 7777;
+
     public function index()
     {
-        //
+        $this->global = 1234;
+        return view('test2');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return $this->global;
     }
 
     /**
@@ -46,7 +45,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        return 999;
     }
 
     /**
