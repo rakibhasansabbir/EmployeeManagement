@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\EmployeeActivity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -14,15 +15,6 @@ class EmployeeController extends Controller
      *
      * @return void
      */
-
-
-
-
-     private $value;
-     private $Time = "click to start";
-//     $_SESSION['variable'] = "rakib";
-
-
 
     public function __construct()
     {
@@ -39,19 +31,40 @@ class EmployeeController extends Controller
     public function index()
     {
         date_default_timezone_set("Asia/Dhaka");
-        $this->value = EmployeeActivity::where('employee_id', Auth::user()->id)->get();
-//        global $value;
+        $EmployeeActivity = EmployeeActivity::where('employee_id',Auth::user()->id )
+            ->whereDate( 'created_at', date("Y-m-d"))
+            ->orderBy('id','desc')
+            ->get();
+        $totalSec = 0;
+        foreach ($EmployeeActivity as $emp) {
 
-//        Session::('value',$this->Time);
-        $_SESSION['variable'] = "new man";
+
+            $totalSec += (($emp->updated_at)->diffInSeconds($emp->created_at));
+
+        }
+        session(['time' => (Carbon::now()->subSeconds($totalSec))]);
+//        echo $totalSec;
+        echo Carbon::now()->subSeconds(60)->diffForHumans();
+
+        $this->value = EmployeeActivity::where('employee_id', Auth::user()->id)
+            ->orderBy('id','desc')
+            ->get();
 
         return view('employee')
             ->with('Activities', $this->value)
-            ->with('time', $this->Time);
+            ->with('time', session('time','default'));
     }
 
     public function store(Request $request)
     {
+        $Time = EmployeeActivity::where('employee_id', $request->input('id'))
+            ->whereDate( 'created_at', date("Y-m-d"))
+            ->get();
+        foreach ($Time as $time){
+            session(['time' => $time->created_at]);
+        }
+
+
         date_default_timezone_set("Asia/Dhaka");
         $this->validate($request,[
             'id'=> 'required',
@@ -73,16 +86,11 @@ class EmployeeController extends Controller
         $EmployeeActivity->macAddress = $request->input('mac');
         $EmployeeActivity->pcName = $request->input('pcName');
         $EmployeeActivity->save();
-        $Time = EmployeeActivity::where('employee_id', $request->input('id'))
-            ->whereDate( 'created_at', date("Y-m-d"))
-            ->get();
-        foreach ($Time as $time){
-            $InTime = $time->created_at;
-        }
+
+
+        session(['time' => date('M d, Y H:i:s')]);
         return redirect('employee')
-            ->with('success','Welcome to our company your time start now')
-            ->with('Activities', $this->value)
-            ->with('time', date('M d, Y H:i:s'));
+            ->with('success','Welcome to our company your time start now');
     }
 
     public function update(Request $request)

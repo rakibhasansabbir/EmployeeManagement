@@ -13,17 +13,28 @@ class TestController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private $global = 7777;
+    private $g;
+
+    public function __construct()
+    {
+        session_start();
+
+//        $_SESSION['g'] = 7777;
+    }
 
     public function index()
     {
-        $this->global = 1234;
-        return view('test2');
+//        session_start();
+
+        $_SESSION['g'] = 3445;
+//        $this->g = 1234;
+        return view('test2')->with('value',$_SESSION['g']);
     }
 
     public function create()
     {
-        return $this->global;
+        echo "jdfsjdf";
+        return view('test2')->with('value',$_SESSION['g']);
     }
 
     /**
