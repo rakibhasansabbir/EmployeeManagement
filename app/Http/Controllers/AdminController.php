@@ -20,7 +20,7 @@ class AdminController extends Controller
 
     public function index()
     {
-      $Activity = EmployeeActivity::all();
+      $Activity = EmployeeActivity::orderBy('id', 'desc')->get();
       return view('activityTable')->with('Activities',$Activity);
 
     }

@@ -27,57 +27,50 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
     public function index()
     {
         date_default_timezone_set("Asia/Dhaka");
-        $EmployeeActivity = EmployeeActivity::where('employee_id',Auth::user()->id )
-            ->whereDate( 'created_at', date("Y-m-d"))
-            ->orderBy('id','desc')
+        $EmployeeActivity = EmployeeActivity::where('employee_id', Auth::user()->id)
+            ->whereDate('created_at', date("Y-m-d"))
             ->get();
         $totalSec = 0;
         foreach ($EmployeeActivity as $emp) {
-
-
             $totalSec += (($emp->updated_at)->diffInSeconds($emp->created_at));
-
+            $latInTime = $emp->created_at;
         }
-        session(['time' => (Carbon::now()->subSeconds($totalSec))]);
-//        echo $totalSec;
-        echo Carbon::now()->subSeconds(60)->diffForHumans();
 
         $this->value = EmployeeActivity::where('employee_id', Auth::user()->id)
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->get();
+        $currentStatus = EmployeeActivity::where('employee_id', Auth::user()->id)
+            ->where('stay', 'YES')
+            ->whereDate('created_at', date("Y-m-d"))
+            ->get();
+        foreach ($currentStatus as $cStatus) {
+
+            session(['time' => ($latInTime->subSeconds($totalSec))]);
+        }
 
         return view('employee')
             ->with('Activities', $this->value)
-            ->with('time', session('time','default'));
+            ->with('time', session('time', 'default'));
     }
 
     public function store(Request $request)
     {
-        $Time = EmployeeActivity::where('employee_id', $request->input('id'))
-            ->whereDate( 'created_at', date("Y-m-d"))
-            ->get();
-        foreach ($Time as $time){
-            session(['time' => $time->created_at]);
-        }
-
-
         date_default_timezone_set("Asia/Dhaka");
-        $this->validate($request,[
-            'id'=> 'required',
-            'ip'=>'required',
-            'mac'=> 'required',
-            'pcName'=> 'required',
+        $this->validate($request, [
+            'id' => 'required',
+            'ip' => 'required',
+            'mac' => 'required',
+            'pcName' => 'required',
         ]);
         $EmployeeActivity = EmployeeActivity::where('employee_id', $request->input('id'))
-            ->where( 'stay', 'YES')
-            ->whereDate( 'created_at', date("Y-m-d"))
+            ->where('stay', 'YES')
+            ->whereDate('created_at', date("Y-m-d"))
             ->get();
         foreach ($EmployeeActivity as $emp) {
-            return redirect('/employee')->with('error','You Already in press STOPPED button to leave');
+            return redirect('/employee')->with('error', 'You Already in press STOPPED button to leave');
         }
         $EmployeeActivity = new EmployeeActivity();
         $EmployeeActivity->stay = "YES";
@@ -87,10 +80,19 @@ class EmployeeController extends Controller
         $EmployeeActivity->pcName = $request->input('pcName');
         $EmployeeActivity->save();
 
+        $EmployeeActivity = EmployeeActivity::where('employee_id', Auth::user()->id)
+            ->whereDate('created_at', date("Y-m-d"))
+            ->orderBy('id', 'desc')
+            ->get();
+        $totalSec = 0;
+        foreach ($EmployeeActivity as $emp) {
+            $totalSec += (($emp->updated_at)->diffInSeconds($emp->created_at));
 
-        session(['time' => date('M d, Y H:i:s')]);
+        }
+        session(['time' => (Carbon::now()->subSeconds($totalSec))]);
+
         return redirect('employee')
-            ->with('success','Welcome to our company your time start now');
+            ->with('success', 'Welcome to our company your time start now');
     }
 
     public function update(Request $request)
@@ -112,6 +114,7 @@ class EmployeeController extends Controller
             $Activity->pcName = $request->input('pcName');
             $Activity->save();
         }
+        session(['time' => "stop"]);
 
         return redirect('/employee')->with('success', 'Thanks for stay here ');
     }

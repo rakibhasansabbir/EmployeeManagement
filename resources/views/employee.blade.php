@@ -37,7 +37,6 @@
 
                             {{Form::submit('STOPPED',['class' => 'btn btn-danger'])}}
                             {!! Form::close() !!}
-
                             <div >
 
                             <script>
@@ -71,8 +70,6 @@
                                 }, 1000);
                             </script>
                         </div>
-                      
-
                     </div>
 
                 </div>

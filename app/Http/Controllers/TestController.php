@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\EmployeeActivity;
+use http\Env;
 
 class TestController extends Controller
 {
@@ -12,28 +13,32 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public static $IP;
 
-    private $g;
+    public static $MAC;
 
-    public function __construct()
+    function __construct()
+
     {
-        session_start();
 
-//        $_SESSION['g'] = 7777;
+        $this->getIP();
+
+        $this->getMAC(env::$IP);
+
     }
+
 
     public function index()
     {
-//        session_start();
 
         $_SESSION['g'] = 3445;
-//        $this->g = 1234;
         return view('test2')->with('value',$_SESSION['g']);
     }
 
+
     public function create()
     {
-        echo "jdfsjdf";
+
         return view('test2')->with('value',$_SESSION['g']);
     }
 
