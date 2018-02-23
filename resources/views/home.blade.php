@@ -124,17 +124,11 @@
                     <td>{{$activities->contactNumber}}</td>
                     <td>{{$activities->dateOfBirth}}</td>
                     <!-- <td>{{$activities->password}}</td> -->
-                    <td style="width: 150px" class="text-center">
+                    <td style="width: 170px" class="text-center">
                         <div class="btn-group btn-group-sm">
                             <a href="/admin/{{$activities->id}}/edit" class="btn btn-success">Edit</a>
-                            {{--<a href="/admin/{{$activities->id}}" class="btn btn-danger">Delete</a>--}}
-
-                            {!! Form::open(['action' => ['AdminController@destroy', $activities->id],
-          'method' => 'POST', 'class' => 'pull-right']) !!}
-
-                            {{Form::hidden('_method', 'DELETE')}}
-                            {{Form::submit('Delete',['class' => 'btn btn-danger'])}}
-                            {!! Form::close() !!}
+                            <a href="/admin/destroy/{{$activities->id}}" class="btn btn-danger">Delete</a>
+                            <a href="/admin/view/{{$activities->id}}" class="btn btn-info">View</a>
 
                         </div>
                     </td>

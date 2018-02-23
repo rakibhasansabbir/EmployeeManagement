@@ -4,11 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+                <div class="panel panel-default" L>
                     <div class="panel-heading">
 
                         <header class="text-right"> EMPLOYEE Dashboard </header>
                         <time class=" panel-title" id="demo"></time>
+
 
                     </div>
 
@@ -37,6 +38,7 @@
 
                             {{Form::submit('STOPPED',['class' => 'btn btn-danger'])}}
                             {!! Form::close() !!}
+
                             <div >
 
                             <script>
@@ -70,6 +72,8 @@
                                 }, 1000);
                             </script>
                         </div>
+                      
+
                     </div>
 
                 </div>

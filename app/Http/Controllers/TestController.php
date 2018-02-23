@@ -13,26 +13,11 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public static $IP;
-
-    public static $MAC;
-
-    function __construct()
-
-    {
-
-        $this->getIP();
-
-        $this->getMAC(env::$IP);
-
-    }
-
 
     public function index()
     {
 
-        $_SESSION['g'] = 3445;
-        return view('test2')->with('value',$_SESSION['g']);
+        return view('singleActivity');
     }
 
 

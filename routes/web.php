@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::resource('admin','AdminController');
+Route::get('admin/view/{id}','AdminController@view');
+Route::get('admin/destroy/{id}','AdminController@destroy');
 Route::resource('test','TestController');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('employee')->group(function (){
