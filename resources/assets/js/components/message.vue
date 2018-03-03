@@ -1,7 +1,6 @@
 <template>
     <div>
         <li class="list-group-item " :class="className"><slot></slot>
-        <!--<time style="font-size: 9px; margin-top: 10px; color: black" >{{time}}</time>-->
             <ul>
                  <small class="badge badge-pill" :class="badgeClass">{{ user }}</small>
                  <small style="color: black; margin-top: 10px; font-size: 9px" >{{ time }}</small>

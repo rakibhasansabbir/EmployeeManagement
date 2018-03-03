@@ -19,6 +19,8 @@
                         </button>
                             <a type="button" class="btn btn-success" href="/admin">
                                 Show Employee Activities </a>
+                            <a type="button" class="btn btn-warning" href="/chat">
+                                Group Chat </a>
                     </div>
                 </div>
             </div>
@@ -129,6 +131,7 @@
                             <a href="/admin/{{$activities->id}}/edit" class="btn btn-success">Edit</a>
                             <a href="/admin/destroy/{{$activities->id}}" class="btn btn-danger">Delete</a>
                             <a href="/admin/view/{{$activities->id}}" class="btn btn-info">View</a>
+                            <a href="/admin/view/{{$activities->id}}" class="btn btn-warning">Chat</a>
 
                         </div>
                     </td>
