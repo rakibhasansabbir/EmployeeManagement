@@ -5,12 +5,12 @@
 {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div cclass="card">
+                    <div class="card-header">Dashboard</div>
 
-                    <div class="panel-body">
+                    <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}

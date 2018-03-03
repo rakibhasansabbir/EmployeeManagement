@@ -7,34 +7,40 @@
 
           <h1 class="text-info text-center"><strong>Activity of {{$Name}}</strong></h1>
           <br>
-
-      <div class="col-xs-3" style="width: 370px; height: 200px">
-            <div class="thumbnail" style="background-color: rgba(227,239,242,0.76)">
-                <div class="caption">
-                    <h4>Total hours worked today</h4>
-                    <h5>{{$todayTotalTime}}</h5>
-                    <h5></h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-3" style="width: 370px; height: 200px">
-            <div class="thumbnail" style="background-color: rgba(227,239,242,0.76)">
-                <div class="caption">
-                    <h4>Total hours worked over past 7 days</h4>
-                    <h5>{{$last7DaysTotalTime}}</h5>
-                    <h5></h5>
-                </div>
-            </div>
-        </div>
+<div class="container-fluid custom-control-inline">
     <div class="col-xs-3" style="width: 370px; height: 200px">
-      <div class="thumbnail" style="background-color: rgba(227,239,242,0.76)">
-        <div class="caption">
-          <h4>Average activity over past 7 days</h4>
-          <h5>{{$last7DaysPercentage}}%</h5>
-          <h5></h5>
+        <div class="card" style="background-color: rgba(227,239,242,0.76)">
+            <div class="card-body">
+                <h4>Total hours worked today &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</h4>
+                <h5>{{$todayTotalTime}}</h5>
+                <h5></h5>
+            </div>
         </div>
-      </div>
     </div>
+    &nbsp
+    &nbsp
+    <div class="col-xs-3" style="width: 370px; height: 200px">
+        <div class="card" style="background-color: rgba(227,239,242,0.76)">
+            <div class="card-body">
+                <h4>Total hours worked over past 7 days</h4>
+                <h5>{{$last7DaysTotalTime}}</h5>
+                <h5></h5>
+            </div>
+        </div>
+    </div>
+    &nbsp
+    &nbsp
+    <div class="col-xs-3" style="width: 365px; height: 200px">
+        <div class="card" style="background-color: rgba(227,239,242,0.76)">
+            <div class="card-body">
+                <h4>Average activity over past 7 days</h4>
+                <h5>{{$last7DaysPercentage}}%</h5>
+                <h5></h5>
+            </div>
+        </div>
+    </div>
+</div>
+
       <div class="table-responsive container">
           <input class="form-control" id="myInput" type="text" placeholder="Search..">
           <br>

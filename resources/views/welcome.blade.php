@@ -5,7 +5,7 @@
         <h1>Hello User!</h1>
         <p>Welcome to our company</p>
         <p><a class="btn btn-primary btn-lg" href="/home" role="button">Admin</a>
-            <a class="btn btn-success btn-lg" href="/employee" role="button">Employee</a>
+            <a class="btn btn-success btn-lg" href="/employee/login" role="button">Employee</a>
         </p>
     </div>
 @endsection
