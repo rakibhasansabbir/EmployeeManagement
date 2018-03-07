@@ -118,4 +118,5 @@ class EmployeeController extends Controller
 
         return redirect('/employee')->with('success', 'Thanks for stay here ');
     }
+
 }

@@ -38,3 +38,4 @@ Route::prefix('employee')->group(function () {
     Route::put('/stopped', 'EmployeeController@update')->name('activity.stop.submit');
 
 });
+

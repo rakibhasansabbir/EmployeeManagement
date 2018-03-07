@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\User;
+use Illuminate\Broadcasting\BroadcastManager;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;
 
@@ -12,9 +16,17 @@ class BroadcastServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(BroadcastManager $broadcastManager)
     {
-        Broadcast::routes();
+
+//        if (Auth::attempt('auth')){
+//            Broadcast::routes();   //admin
+//        }else{
+//            Broadcast::routes(['middleware' => ['web','auth:employee']]);   //employee
+//        }
+
+        Broadcast::routes();   //admin
+
 
         require base_path('routes/channels.php');
     }

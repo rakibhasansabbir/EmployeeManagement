@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\User;
 use App\Events\ChatEvent;
 use Illuminate\Http\Request;
@@ -17,15 +18,23 @@ class ChatController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+//        $this->middleware('auth:employee');
+
+
     }
 
     public function chat(){
+
         return view('chat');
     }
 
     public function send(request $request) {
 
-        $user = User::find(Auth::id());
+        if (Employee::all()){
+            $user = Employee::find(Auth::id());
+        }else{
+            $user = User::find(Auth::id());
+        }
         $this->saveToSession($request);
         event(new ChatEvent($request->message,$user));
     }

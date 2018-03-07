@@ -18,7 +18,7 @@ class ChatEvent implements ShouldBroadcast
     public $message;
     public $user;
 
-    public function __construct($message, User $user)
+    public function __construct($message, $user)
     {
         $this->message = $message;
         $this->user = $user->name;
