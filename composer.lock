@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "3dc43d10a41ebee7c2351ac40190ecc4",
@@ -1251,21 +1251,22 @@
         },
         {
             "name": "pusher/pusher-php-server",
-            "version": "v3.0.1",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pusher/pusher-http-php.git",
-                "reference": "03d3417748fc70a889c97271e25e282ff1ff0ae3"
+                "reference": "d9260b2d11e4ad45a9f1c95269b18e16b2518447"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/03d3417748fc70a889c97271e25e282ff1ff0ae3",
-                "reference": "03d3417748fc70a889c97271e25e282ff1ff0ae3",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/d9260b2d11e4ad45a9f1c95269b18e16b2518447",
+                "reference": "d9260b2d11e4ad45a9f1c95269b18e16b2518447",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": "^5.4 || ^7.0"
+                "php": "^5.4 || ^7.0",
+                "psr/log": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8 || ^5.7"
@@ -1299,7 +1300,7 @@
                 "rest",
                 "trigger"
             ],
-            "time": "2017-10-20T11:18:01+00:00"
+            "time": "2018-07-13T13:24:54+00:00"
         },
         {
             "name": "ramsey/uuid",
